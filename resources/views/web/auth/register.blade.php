@@ -39,7 +39,7 @@
 									<input class="form-control rounded-1 number @error('dni') is-invalid @enderror" type="text" name="dni" required placeholder="RUT" minlength="2" value="{{ old('dni') }}">
 									<div class="input-group-append">
 										<span class="input-group-text pt-0">-</span>
-										<input class="form-control input-group-text bg-white text-left rounded-1 @error('verify_digit') is-invalid @enderror" type="text" name="verify_digit" required minlength="1" maxlength="1" placeholder="DV" value="{{ old('verify_digit') }}" id="dv">
+										<input class="form-control input-group-text bg-white text-left rounded-1 w-70 @error('verify_digit') is-invalid @enderror" type="text" name="verify_digit" required minlength="1" maxlength="1" placeholder="DV" value="{{ old('verify_digit') }}" id="dv">
 									</div>
 								</div>
 							</div>
@@ -114,7 +114,7 @@
 
 							<div class="form-group col-12 mb-2">
                                 <input type="checkbox" name="terms" required value="checked" id="terms-conditions">
-                                <label class="h5 text-body small mb-0" for="terms-conditions">Acepto <a href="javascript:void(0);" class="text-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-terms">Términos y condiciones</a></label>
+                                <label class="h5 text-body small mb-0" for="terms-conditions">Al registrarse como paciente de la plataforma de Doctoonline.cl, declaro enender las limitaciones que pueda tener una consulta Online de teleconsulta, por lo que acepto y doy mi consentimiento a todos los <a href="javascript:void(0);" class="text-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-terms">Términos y condiciones de Uso </a> que acá se detallan.</label>
                             </div>
 
 							<div class="form-group col-12">

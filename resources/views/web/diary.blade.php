@@ -63,7 +63,7 @@
 											<input class="form-control rounded-1 number @error('dni') is-invalid @enderror" type="text" name="dni" required minlength="2" value="{{ old('dni') }}" id="valid-dni">
 											<div class="input-group-append">
 												<span class="input-group-text pt-0">-</span>
-												<input class="form-control input-group-text bg-white text-left rounded-1 @error('verify_digit') is-invalid @enderror" type="text" name="verify_digit" required minlength="1" maxlength="1" value="{{ old('verify_digit') }}" id="valid-dv">
+												<input class="form-control input-group-text bg-white text-left rounded-1 w-70 @error('verify_digit') is-invalid @enderror" type="text" name="verify_digit" required minlength="1" maxlength="1" value="{{ old('verify_digit') }}" id="valid-dv">
 											</div>
 										</div>
 									</div>
@@ -295,6 +295,8 @@
 			</div>
 
 			@elseif(session()->has('diary') && session('diary')[0]['phase']==3)
+
+			{{ dd(session('diary')) }}
 
 			<div class="card bg-light shadow mx-xl-5 px-lg-5">
 				<div class="card-body">

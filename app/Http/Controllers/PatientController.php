@@ -167,7 +167,7 @@ class PatientController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
-        $data=array('dni' => request('dni'), 'verify_digit' => request('verify_digit'), 'name' => request('name'), 'first_lastname' => request('first_lastname'), 'second_lastname' => request('second_lastname'), 'phone' => request('phone'), 'celular' => request('celular'), 'birthday' => date('Y-m-d', strtotime(request('birthday'))), 'commune_id' => request('commune_id'), 'country_id' => request('country_id'), 'address' => request('address'), 'postal' => request('postal'), 'gender' => request('gender'));
+        $data=array('dni' => request('dni'), 'verify_digit' => request('verify_digit'), 'name' => request('name'), 'first_lastname' => request('first_lastname'), 'second_lastname' => request('second_lastname'), 'phone' => request('phone'), 'celular' => request('celular'), 'birthday' => date('Y-m-d', strtotime(request('birthday'))), 'commune_id' => request('commune_id'), 'country_id' => request('country_id'), 'address' => request('address'), 'postal' => request('postal'), 'gender' => request('gender'), 'email' => request('email'));
 
         if (!is_null(request('password'))) {
             $data['password']=Hash::make(request('password'));
@@ -208,7 +208,7 @@ class PatientController extends Controller
     public function destroy($slug)
     {
         $patient=People::where('slug', $slug)->firstOrFail();
-        if (is_null($people->patient)) {
+        if (is_null($patient->patient)) {
             $patient->delete();
         } else {
             $patient=Patient::where('people_id', $patient->id)->firstOrFail();

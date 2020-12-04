@@ -106,7 +106,6 @@ class WebController extends Controller
     }
 
     public function diary(Request $request, $phase=NULL) {
-        $this->visitor();
         $setting=Setting::where('id', "1")->first();
         $services=Service::where('state', "1")->orderBy('id', 'DESC')->get();
 
@@ -120,13 +119,27 @@ class WebController extends Controller
             }
         }
 
-        if ($phase=='area-y-profesional' && session()->has('diary') && session('diary')[0]['phase']==1) {
+        if ($phase!="area-y-profesional" && session()->has('diary') && session('diary')[0]['phase']==1) {
+            return redirect()->route('diary', ['phase' => 'area-y-profesional']);
+        }
+
+        if ($phase!="fecha-y-hora" && session()->has('diary') && session('diary')[0]['phase']==2) {
+            return redirect()->route('diary', ['phase' => 'fecha-y-hora']);
+        }
+
+        if ($phase!="pago-y-confirmacion" && session()->has('diary') && session('diary')[0]['phase']==3) {
+            return redirect()->route('diary', ['phase' => 'pago-y-confirmacion']);
+        }
+
+        if (session()->has('diary') && session('diary')[0]['phase']==1) {
+            $this->visitor();
             $specialties=Specialty::all();
             $categories=CategoryDiary::all();
             return view('web.diary', compact('setting', 'services', 'phase', 'categories', 'specialties'));
         }
 
-        if ($phase=='fecha-y-hora' && session()->has('diary') && session('diary')[0]['phase']==2) {
+        if (session()->has('diary') && session('diary')[0]['phase']==2) {
+            $this->visitor();
             $service=session('diary')[0]['service'];
             if ($service->type==1) {
                 $doctor=People::where('slug', session('diary')[0]['doctor']->slug)->firstOrFail();
@@ -226,7 +239,8 @@ class WebController extends Controller
             return view('web.diary', compact('setting', 'services', 'phase', 'times', 'service', 'selected'));
         }
 
-        if ($phase=='pago-y-confirmacion' && session()->has('diary') && session('diary')[0]['phase']==3) {
+        if (session()->has('diary') && session('diary')[0]['phase']==3) {
+            $this->visitor();
             $service=session('diary')[0]['service'];
             if ($service->type==1) {
                 $schedule=session('diary')[0]['doctor']->doctor->diary_doctor->schedules->where('service_id', $service->id);
@@ -237,6 +251,7 @@ class WebController extends Controller
             return view('web.diary', compact('setting', 'services', 'phase', 'schedule'));
         }
 
+        $this->visitor();
         return view('web.diary', compact('setting', 'services', 'phase'));
     }
 

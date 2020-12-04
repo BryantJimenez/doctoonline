@@ -660,63 +660,64 @@ $(document).ready(function(){
 				form.submit();
 			}
 		});
-});
-
-$("button[action='patientOld']").on("click",function(){
-	$("#formPatientOld").validate({
-		rules:
-		{
-			civil_state: {
-				required: true
-			},
-
-			laboral: {
-				required: true
-			},
-
-			study_id: {
-				required: true
-			},
-
-			insurer_id: {
-				required: true
-			},
-
-			children: {
-				required: true,
-				min: 1,
-				max: 99
-			}
-		},
-		messages:
-		{
-			civil_state: {
-				required: 'Seleccione una opción.'
-			},
-
-			laboral: {
-				required: 'Seleccione una opción.'
-			},
-
-			study_id: {
-				required: 'Seleccione una opción.'
-			},
-
-			insurer_id: {
-				required: 'Seleccione una opción.'
-			},
-
-			children: {
-				min: 'Escribe mínimo el número {0}.',
-				max: 'Escribe máximo el número {0}.'
-			}
-		},
-		submitHandler: function(form) {
-			$("button[action='patientOld']").attr('disabled', true);
-			form.submit();
-		}
 	});
-});
+
+	// Pacientes 
+	$("button[action='patientOld']").on("click",function(){
+		$("#formPatientOld").validate({
+			rules:
+			{
+				civil_state: {
+					required: true
+				},
+
+				laboral: {
+					required: true
+				},
+
+				study_id: {
+					required: true
+				},
+
+				insurer_id: {
+					required: true
+				},
+
+				children: {
+					required: true,
+					min: 1,
+					max: 99
+				}
+			},
+			messages:
+			{
+				civil_state: {
+					required: 'Seleccione una opción.'
+				},
+
+				laboral: {
+					required: 'Seleccione una opción.'
+				},
+
+				study_id: {
+					required: 'Seleccione una opción.'
+				},
+
+				insurer_id: {
+					required: 'Seleccione una opción.'
+				},
+
+				children: {
+					min: 'Escribe mínimo el número {0}.',
+					max: 'Escribe máximo el número {0}.'
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='patientOld']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
 
 	//Pacientes editar
 	$("button[action='patient']").on("click",function(){
@@ -771,6 +772,13 @@ $("button[action='patientOld']").on("click",function(){
 
 				gender: {
 					required: true
+				},
+
+				email: {
+					required: true,
+					email: true,
+					minlength: 5,
+					maxlength: 191
 				},
 
 				country_id: {
@@ -881,6 +889,12 @@ $("button[action='patientOld']").on("click",function(){
 					required: 'Seleccione una opción.'
 				},
 
+				email: {
+					email: 'Introduce una dirección de correo valida.',
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
 				country_id: {
 					required: 'Seleccione una opción.'
 				},
@@ -948,7 +962,7 @@ $("button[action='patientOld']").on("click",function(){
 				form.submit();
 			}
 		});
-	});
+});
 
 	//Médicos
 	$("button[action='doctor']").on("click",function(){
@@ -1201,66 +1215,67 @@ $("button[action='patientOld']").on("click",function(){
 				form.submit();
 			}
 		});
-});
-
-$("button[action='doctorOld']").on("click",function(){
-	$("#formDoctorOld").validate({
-		rules:
-		{
-			profession: {
-				required: true
-			},
-
-			number_doctor: {
-				required: true,
-				minlength: 1,
-				maxlength: 191
-			},
-
-			inscription: {
-				required: true,
-				minlength: 1,
-				maxlength: 191
-			},
-
-			specialty_id: {
-				required: true
-			},
-
-			signature: {
-				required: true
-			}
-		},
-		messages:
-		{
-			profession: {
-				required: 'Seleccione una opción.'
-			},
-
-			number_doctor: {
-				minlength: 'Escribe mínimo {0} caracteres.',
-				maxlength: 'Escribe máximo {0} caracteres.'
-			},
-
-			inscription: {
-				minlength: 'Escribe mínimo {0} caracteres.',
-				maxlength: 'Escribe máximo {0} caracteres.'
-			},
-
-			specialty_id: {
-				required: 'Seleccione una opción.'
-			},
-
-			signature: {
-				required: 'Seleccione una foto.'
-			}
-		},
-		submitHandler: function(form) {
-			$("button[action='doctorOld']").attr('disabled', true);
-			form.submit();
-		}
 	});
-});
+
+	// Médicos
+	$("button[action='doctorOld']").on("click",function(){
+		$("#formDoctorOld").validate({
+			rules:
+			{
+				profession: {
+					required: true
+				},
+
+				number_doctor: {
+					required: true,
+					minlength: 1,
+					maxlength: 191
+				},
+
+				inscription: {
+					required: true,
+					minlength: 1,
+					maxlength: 191
+				},
+
+				specialty_id: {
+					required: true
+				},
+
+				signature: {
+					required: true
+				}
+			},
+			messages:
+			{
+				profession: {
+					required: 'Seleccione una opción.'
+				},
+
+				number_doctor: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				inscription: {
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
+				},
+
+				specialty_id: {
+					required: 'Seleccione una opción.'
+				},
+
+				signature: {
+					required: 'Seleccione una foto.'
+				}
+			},
+			submitHandler: function(form) {
+				$("button[action='doctorOld']").attr('disabled', true);
+				form.submit();
+			}
+		});
+	});
 
 	//Médicos editar
 	$("button[action='doctor']").on("click",function(){
@@ -1315,6 +1330,13 @@ $("button[action='doctorOld']").on("click",function(){
 
 				gender: {
 					required: true
+				},
+
+				email: {
+					required: true,
+					email: true,
+					minlength: 5,
+					maxlength: 191
 				},
 
 				country_id: {
@@ -1425,6 +1447,12 @@ $("button[action='doctorOld']").on("click",function(){
 
 				gender: {
 					required: 'Seleccione una opción.'
+				},
+
+				email: {
+					email: 'Introduce una dirección de correo valida.',
+					minlength: 'Escribe mínimo {0} caracteres.',
+					maxlength: 'Escribe máximo {0} caracteres.'
 				},
 
 				country_id: {
@@ -3567,7 +3595,7 @@ $("button[action='doctorOld']").on("click",function(){
 				form.submit();
 			}
 		});
-});
+	});
 
 	// Reportes (Revision)
 	$("button[action='report']").on("click",function(){

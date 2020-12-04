@@ -11,14 +11,16 @@
 						<span class="small">{{ $setting->email }}</span>
 					</p>
 				</a>
-				<a href="{{ route('ingresar') }}" class="w-50 d-flex justify-content-end">
+				<div class="w-50 d-flex justify-content-end header-user-access">
 					<img src="{{ asset('/web/img/usuario.png') }}" width="45" height="45" alt="Icono Usuario">
-					<p class="text-muted lh-18 mb-0 pt-2 pl-3">
+					<p class="text-muted lh-18 mb-0 pt-0 pl-3">
 						<b>Tu Cuenta</b>
 						<br>
-						<span class="small">Acceso Clientes</span>
+						<a href="{{ route('ingresar') }}" class="text-muted"><span class="small">Acceso Clientes</span></a>
+						<br>
+						<a href="{{ route('recuperar') }}" class="text-muted"><span class="small">Pedí tu Clave</span></a>
 					</p>
-				</a>
+				</div>
 			</div>
 		</div>
 	</div>

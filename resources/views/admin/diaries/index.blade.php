@@ -40,6 +40,7 @@
 										<th>#</th>
 										<th>Fecha y Hora</th>
 										<th>Paciente</th>
+										<th>Médico</th>
 										<th>Servicio</th>
 										<th>Total</th>
 										<th>Estado</th>
@@ -52,6 +53,7 @@
 										<td>{{ $num++ }}</td>
 										<td>{{ date('d-m-Y H:i A', strtotime($diary->date." ".$diary->time)) }}</td>
 										<td>{{ $diary->name." ".$diary->lastname }}</td>
+										<td>@if(!is_null($diary->diary_service->doctor_service)){{ $diary->diary_service->doctor_service->people->name." ".$diary->diary_service->doctor_service->people->first_lastname." ".$diary->diary_service->doctor_service->people->second_lastname }}<br>{{  $diary->diary_service->doctor_service->people->dni."-".$diary->diary_service->doctor_service->people->verify_digit }}@else{{ "Ninguno" }}@endif</td>
 										<td>{{ $diary->diary_service->service->name }}</td>
 										<td>{{ number_format($diary->amount, 2, ",", ".") }}</td>
 										<td>{!! stateDiary($diary->state) !!}</td>

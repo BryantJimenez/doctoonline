@@ -28,6 +28,10 @@ class AuthController extends Controller
 		if (!is_null($user)) {
 			if ((!is_null($user->patient) && $user->patient->state==0) && (!is_null($user->doctor) && $user->doctor->state==0)) {
 				return redirect()->back()->with(['error.login' => 'Este usuario no tiene permitido ingresar.'])->withInput();
+			} elseif(!is_null($user->patient) && $user->patient->state==0 && is_null($user->doctor)) {
+				return redirect()->back()->with(['error.login' => 'Este paciente no tiene permitido ingresar.'])->withInput();
+			} elseif(!is_null($user->doctor) && $user->doctor->state==0 && is_null($user->patient)) {
+				return redirect()->back()->with(['error.login' => 'Este médico no tiene permitido ingresar.'])->withInput();
 			} elseif(Hash::check(request('password'), $user->password)) {
 				if ($request->session()->has('user')) {
 					$request->session()->forget('user');

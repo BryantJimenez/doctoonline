@@ -48,11 +48,11 @@
                     </div>
 
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/geo.png') }}" width="15" height="17"><span class="text-primary pl-2">Dirección:</span> @if(!is_null(session('user')[0]->address)){{ session('user')[0]->address }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/geo.png') }}" width="15" height="17"><span class="text-primary pl-2">Dirección:</span> @if(!empty(session('user')[0]->address)){{ session('user')[0]->address }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/codigopostal.png') }}" width="20" height="15"><span class="text-primary pl-2">Cod. Postal:</span> @if(!is_null(session('user')[0]->postal)){{ session('user')[0]->postal }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/codigopostal.png') }}" width="20" height="15"><span class="text-primary pl-2">Cod. Postal:</span> @if(!empty(session('user')[0]->postal)){{ session('user')[0]->postal }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -72,11 +72,11 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/telefono.png') }}" width="15" height="15"><span class="text-primary pl-2">Teléfono Fijo:</span> @if(!is_null(session('user')[0]->phone)){{ session('user')[0]->phone }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/telefono.png') }}" width="15" height="15"><span class="text-primary pl-2">Teléfono Fijo:</span> @if(!empty(session('user')[0]->phone)){{ session('user')[0]->phone }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/celular.png') }}" width="13" height="18"><span class="text-primary pl-2">Móvil:</span> @if(!is_null(session('user')[0]->celular)){{ session('user')[0]->celular }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/celular.png') }}" width="13" height="18"><span class="text-primary pl-2">Móvil:</span> @if(!empty(session('user')[0]->celular)){{ session('user')[0]->celular }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -121,11 +121,11 @@
                     </div>
 
                     <div class="col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/geo.png') }}" width="15" height="17"><span class="text-primary pl-2">Dirección:</span> @if(!is_null(session('user')[0]->address)){{ session('user')[0]->address }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/geo.png') }}" width="15" height="17"><span class="text-primary pl-2">Dirección:</span> @if(!empty(session('user')[0]->address)){{ session('user')[0]->address }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/codigopostal.png') }}" width="20" height="15"><span class="text-primary pl-2">Cod. Postal:</span> @if(!is_null(session('user')[0]->postal)){{ session('user')[0]->postal }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/codigopostal.png') }}" width="20" height="15"><span class="text-primary pl-2">Cod. Postal:</span> @if(!empty(session('user')[0]->postal)){{ session('user')[0]->postal }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -133,11 +133,11 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/telefono.png') }}" width="15" height="15"><span class="text-primary pl-2">Teléfono Fijo:</span> @if(!is_null(session('user')[0]->phone)){{ session('user')[0]->phone }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/telefono.png') }}" width="15" height="15"><span class="text-primary pl-2">Teléfono Fijo:</span> @if(!empty(session('user')[0]->phone)){{ session('user')[0]->phone }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/celular.png') }}" width="13" height="18"><span class="text-primary pl-2">Móvil:</span> @if(!is_null(session('user')[0]->celular)){{ session('user')[0]->celular }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/celular.png') }}" width="13" height="18"><span class="text-primary pl-2">Móvil:</span> @if(!empty(session('user')[0]->celular)){{ session('user')[0]->celular }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -145,24 +145,24 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <p class="h6 my-3"><img src="{{ asset('/web/img/estadocivil.png') }}" width="18" height="15"><span class="text-primary pl-2">Civil:</span> @if(!is_null(session('user')[0]->patient->civil_state)){{ session('user')[0]->patient->civil_state }}@else{{ 'No Ingresado' }}@endif</p>
+                        <p class="h6 my-3"><img src="{{ asset('/web/img/estadocivil.png') }}" width="18" height="15"><span class="text-primary pl-2">Civil:</span> @if(!is_null(session('user')[0]->patient) && !empty(session('user')[0]->patient->civil_state)){{ session('user')[0]->patient->civil_state }}@else{{ 'No Ingresado' }}@endif</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                <p class="h6 my-3"><span class="text-primary">Hijos:</span> @if(!is_null(session('user')[0]->patient->children) && session('user')[0]->patient->children>0){{ "Si (".session('user')[0]->patient->children." Hijos)" }}@else{{ "No" }}@endif</p>
+                <p class="h6 my-3"><span class="text-primary">Hijos:</span> @if(!is_null(session('user')[0]->patient) && session('user')[0]->patient->children>0){{ "Si (".session('user')[0]->patient->children." Hijos)" }}@else{{ "No" }}@endif</p>
             </div>
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                <p class="h6 my-3"><span class="text-primary">Sit. Laboral:</span> @if(!is_null(session('user')[0]->patient->laboral)){{ session('user')[0]->patient->laboral }}@else{{ 'No Ingresado' }}@endif</p>
+                <p class="h6 my-3"><span class="text-primary">Sit. Laboral:</span> @if(!is_null(session('user')[0]->patient) && !empty(session('user')[0]->patient->laboral)){{ session('user')[0]->patient->laboral }}@else{{ 'No Ingresado' }}@endif</p>
             </div>
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                <p class="h6 my-3"><span class="text-primary">Educación:</span> @if(!is_null(session('user')[0]->patient->study)){{ session('user')[0]->patient->study->name }}@else{{ 'No Ingresado' }}@endif</p>
+                <p class="h6 my-3"><span class="text-primary">Educación:</span> @if(!is_null(session('user')[0]->patient) && !is_null(session('user')[0]->patient->study)){{ session('user')[0]->patient->study->name }}@else{{ 'No Ingresado' }}@endif</p>
             </div>
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                <p class="h6 my-3"><span class="text-primary">Aseguradora:</span> @if(!is_null(session('user')[0]->patient->insurer)){{ session('user')[0]->patient->insurer->name }}@else{{ 'No Ingresado' }}@endif</p>
+                <p class="h6 my-3"><span class="text-primary">Aseguradora:</span> @if(!is_null(session('user')[0]->patient) && !is_null(session('user')[0]->patient->insurer)){{ session('user')[0]->patient->insurer->name }}@else{{ 'No Ingresado' }}@endif</p>
             </div>
             @endif
         </div>

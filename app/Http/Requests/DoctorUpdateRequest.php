@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\People;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -25,6 +26,7 @@ class DoctorUpdateRequest extends FormRequest
    */
   public function rules()
   {
+    $people=People::where('slug', $this->slug)->first();
     return [
       'photo' => 'nullable|file|mimetypes:image/*',
       'dni' => 'required|string|min:2|max:11',
@@ -35,6 +37,7 @@ class DoctorUpdateRequest extends FormRequest
       'phone' => 'required|string|min:5|max:15',
       'celular' => 'required|string|min:5|max:15',
       'gender' => 'required|'.Rule::in(["Masculino", "Femenino"]),
+      'email' => 'required|string|email|max:191|'.Rule::unique('people')->ignore($people->email, 'email'),
       'country_id' => 'required',
       'commune_id' => 'required',
       'postal' => 'required|string|min:1|max:8',

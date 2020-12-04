@@ -164,6 +164,14 @@
   width: 400px;
 }
 
+.w-70 {
+  width: 70px !important;
+}
+
+.header-user-access a:hover {
+  color: #86c3d7 !important;
+}
+
 .px-diary-button {
   padding-left: .5rem;
   padding-right: .5rem;
