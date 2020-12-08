@@ -187,7 +187,9 @@ class AdminController extends Controller
             $end=date("H:i", strtotime($start."+".($setting->interval-1)." minutes"));
 
             $count=Diary::where('date', date("Y-m-d", strtotime(request('date'))))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->count();
-            if ($count>0) {
+            if (date('Y-m-d H:i')>date('Y-m-d H:i', strtotime(date("Y-m-d", strtotime(request('date')))." ".$end))) {
+                $type="2";
+            } elseif ($count>0) {
                 $datesDiaries=Diary::where('date', date("Y-m-d", strtotime(request('date'))))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->get();
                 $datesDiaries=$datesDiaries->map(function($item, $key) use ($service, $compare) {
                     if ($service->type==1) {
@@ -226,7 +228,9 @@ class AdminController extends Controller
                     $end=date("H:i", strtotime($actual."+".($setting->interval-1)." minutes"));
 
                     $count=Diary::where('date', date("Y-m-d", strtotime(request('date'))))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->count();
-                    if ($count>0) {
+                    if (date('Y-m-d H:i')>date('Y-m-d H:i', strtotime(date("Y-m-d", strtotime(request('date')))." ".$end))) {
+                        $type="2";
+                    } elseif ($count>0) {
                         $datesDiaries=Diary::where('date', date("Y-m-d", strtotime(request('date'))))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->get();
                         $datesDiaries=$datesDiaries->map(function($item, $key) use ($service, $compare) {
                             if ($service->type==1) {

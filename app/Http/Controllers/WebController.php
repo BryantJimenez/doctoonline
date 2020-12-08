@@ -161,7 +161,9 @@ class WebController extends Controller
                 $end=date("H:i", strtotime($start."+".($setting->interval-1)." minutes"));
 
                 $count=Diary::where('date', date("Y-m-d"))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->count();
-                if ($count>0) {
+                if (date('H:i')>$end) {
+                    $type="2";
+                } elseif ($count>0) {
                     $datesDiaries=Diary::where('date', date("Y-m-d"))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->get();
                     $datesDiaries=$datesDiaries->map(function($item, $key) use ($service, $compare) {
                         if ($service->type==1) {
@@ -200,7 +202,9 @@ class WebController extends Controller
                         $end=date("H:i", strtotime($actual."+".($setting->interval-1)." minutes"));
 
                         $count=Diary::where('date', date("Y-m-d"))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->count();
-                        if ($count>0) {
+                        if (date('H:i')>$end) {
+                            $type="2";
+                        } elseif ($count>0) {
                             $datesDiaries=Diary::where('date', date("Y-m-d"))->whereBetween('time', [date('H:i', strtotime($start)), date('H:i', strtotime($end))])->get();
                             $datesDiaries=$datesDiaries->map(function($item, $key) use ($service, $compare) {
                                 if ($service->type==1) {
@@ -308,12 +312,12 @@ class WebController extends Controller
         if (session('diary')[0]['type']==1) {
             $schedule=session('diary')[0]['doctor']->doctor->diary_doctor->schedules->where('service_id', session('diary')[0]['service']->id);
 
-            $optional=json_encode(array("rut" => session('diary')[0]['dni']."-".session('diary')[0]['verify_digit'], "dni" => session('diary')[0]['dni'], "verify_digit" => session('diary')[0]['verify_digit'], "name" => session('diary')[0]['name'], "lastname" => session('diary')[0]['lastname'], 'phone' => session('diary')[0]['phone'], 'birthday' => session('diary')[0]['birthday'], 'gender' => session('diary')[0]['gender'], 'date' => date('Y-m-d', strtotime(session('diary')[0]['date'])), 'time' => substr(session('diary')[0]['time'], 0, -3), 'type' => session('diary')[0]['type'], 'service_id' => session('diary')[0]['service']->id, 'specialty_id' => session('diary')[0]['specialty']->id, 'people_id' => session('diary')[0]['doctor']->id));
+            $optional=json_encode(array("rut" => session('diary')[0]['dni']."-".session('diary')[0]['verify_digit'], "name" => session('diary')[0]['name'], "lastname" => session('diary')[0]['lastname'], 'phone' => session('diary')[0]['phone'], 'birthday' => session('diary')[0]['birthday'], 'gender' => session('diary')[0]['gender'], 'date' => date('Y-m-d', strtotime(session('diary')[0]['date'])), 'time' => substr(session('diary')[0]['time'], 0, -3), 'type' => session('diary')[0]['type'], 'service_id' => session('diary')[0]['service']->id, 'specialty_id' => session('diary')[0]['specialty']->id, 'people_id' => session('diary')[0]['doctor']->id));
 
         } elseif (session('diary')[0]['type']==2) {
             $schedule=session('diary')[0]['subcategory']->schedules->where('service_id', session('diary')[0]['service']->id);
 
-            $optional=json_encode(array("rut" => session('diary')[0]['dni']."-".session('diary')[0]['verify_digit'], "dni" => session('diary')[0]['dni'], "verify_digit" => session('diary')[0]['verify_digit'], "name" => session('diary')[0]['name'], "lastname" => session('diary')[0]['lastname'], 'phone' => session('diary')[0]['phone'], 'birthday' => session('diary')[0]['birthday'], 'gender' => session('diary')[0]['gender'], 'date' => date('Y-m-d', strtotime(session('diary')[0]['date'])), 'time' => substr(session('diary')[0]['time'], 0, -3), 'type' => session('diary')[0]['type'], 'service_id' => session('diary')[0]['service']->id, 'subcategory_id' => session('diary')[0]['subcategory']->id));
+            $optional=json_encode(array("rut" => session('diary')[0]['dni']."-".session('diary')[0]['verify_digit'], "name" => session('diary')[0]['name'], "lastname" => session('diary')[0]['lastname'], 'phone' => session('diary')[0]['phone'], 'birthday' => session('diary')[0]['birthday'], 'gender' => session('diary')[0]['gender'], 'date' => date('Y-m-d', strtotime(session('diary')[0]['date'])), 'time' => substr(session('diary')[0]['time'], 0, -3), 'type' => session('diary')[0]['type'], 'service_id' => session('diary')[0]['service']->id, 'subcategory_id' => session('diary')[0]['subcategory']->id));
         }
 
         $params=array("commerceOrder" => rand(1100, 2000), "subject" => "Pago del servicio: ".session('diary')[0]['service']->name, "currency" => "CLP", "amount" => number_format($schedule->first()->price, 0, ".", ""), "email" => session('diary')[0]['email'], "paymentMethod" => 1, "urlConfirmation" => env("APP_URL")."/agendar/confirmacion", "urlReturn" => env("APP_URL")."/agendar/respuesta", "optional" => $optional);
@@ -356,7 +360,8 @@ class WebController extends Controller
                     $slug='reserva-'.$num;
                     $num++;
                 } else {
-                    $data=array('slug' => $slug, 'dni' => $response['optional']['dni'], 'verify_digit' => $response['optional']['verify_digit'], 'name' => $response['optional']['name'], 'lastname' => $response['optional']['lastname'], 'email' => $response['payer'], 'phone' => $response['optional']['phone'], 'birthday' => $response['optional']['birthday'], 'gender' => $response['optional']['gender'], 'date' => $response['optional']['date'], 'time' => $response['optional']['time'], 'amount' => $response['paymentData']['amount'], 'payment_id' => $payment->id);
+                    $rut=explode("-", $response['optional']['rut']);
+                    $data=array('slug' => $slug, 'dni' => $rut[0], 'verify_digit' => $rut[1], 'name' => $response['optional']['name'], 'lastname' => $response['optional']['lastname'], 'email' => $response['payer'], 'phone' => $response['optional']['phone'], 'birthday' => $response['optional']['birthday'], 'gender' => $response['optional']['gender'], 'date' => $response['optional']['date'], 'time' => $response['optional']['time'], 'amount' => $response['paymentData']['amount'], 'payment_id' => $payment->id);
                     break;
                 }
             }

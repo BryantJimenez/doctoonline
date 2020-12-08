@@ -4,7 +4,7 @@
 			<a href="{{ route('home') }}"><img src="{{ asset('/web/img/logo.png') }}" width="210" height="47" alt="Logo"></a>
 			<div class="w-400 d-flex">
 				<a href="https://api.whatsapp.com/send?phone={{ Str::slug($setting->phone, "") }}&text=Hola, dame tu nombre, teléfono y te contactaremos" target="_blank" class="w-50 d-flex justify-content-end">
-					<img src="{{ asset('/web/img/whatsapp.png') }}" width="45" height="45" alt="Icono Whatsapp">
+					<img src="{{ asset('/web/img/whatsapp.png') }}" width="50" height="50" alt="Icono Whatsapp">
 					<p class="text-muted lh-18 mb-0 pt-2 pl-3">
 						<b>{{ $setting->phone }}</b>
 						<br>
@@ -12,13 +12,13 @@
 					</p>
 				</a>
 				<div class="w-50 d-flex justify-content-end header-user-access">
-					<img src="{{ asset('/web/img/usuario.png') }}" width="45" height="45" alt="Icono Usuario">
-					<p class="text-muted lh-18 mb-0 pt-0 pl-3">
+					<img src="{{ asset('/web/img/usuario.png') }}" width="50" height="50" alt="Icono Usuario">
+					<p class="text-muted lh-18 mb-0 mt-n-1 pl-3">
 						<b>Tu Cuenta</b>
 						<br>
 						<a href="{{ route('ingresar') }}" class="text-muted"><span class="small">Acceso Clientes</span></a>
 						<br>
-						<a href="{{ route('recuperar') }}" class="text-muted"><span class="small">Pedí tu Clave</span></a>
+						<a href="{{ route('recuperar') }}" class="text-muted"><span class="small">Pide tu Clave</span></a>
 					</p>
 				</div>
 			</div>

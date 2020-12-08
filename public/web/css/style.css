@@ -168,6 +168,10 @@
   width: 70px !important;
 }
 
+.mt-n-1 {
+  margin-top: -0.25rem !important;
+}
+
 .header-user-access a:hover {
   color: #86c3d7 !important;
 }

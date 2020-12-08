@@ -296,8 +296,6 @@
 
 			@elseif(session()->has('diary') && session('diary')[0]['phase']==3)
 
-			{{ dd(session('diary')) }}
-
 			<div class="card bg-light shadow mx-xl-5 px-lg-5">
 				<div class="card-body">
 					<form action="{{ route('diary.store.four') }}" method="POST" class="form">
