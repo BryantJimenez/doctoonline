@@ -255,6 +255,21 @@ $(document).ready(function() {
     });
   }
 
+  //CKeditor plugin
+  if ($('#content-order').length) {
+    CKEDITOR.config.height=200;
+    CKEDITOR.config.width='auto';
+    CKEDITOR.config.removePlugins='image,table,tableselection,tabletools,pastefromword,pastetools,specialchar,about';
+    CKEDITOR.replace('content-order');
+  }
+
+  if ($('#content-recipe').length) {
+    CKEDITOR.config.height=200;
+    CKEDITOR.config.width='auto';
+    CKEDITOR.config.removePlugins='image,table,tableselection,tabletools,pastefromword,pastetools,specialchar,about';
+    CKEDITOR.replace('content-recipe');
+  }
+
   //Jquery uploader
   if ($('.dm-uploader').length && $('#slug').length) {
     var slug=$('#slug').val();

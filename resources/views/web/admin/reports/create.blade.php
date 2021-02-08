@@ -659,7 +659,7 @@
 
                         <div class="form-group col-12">
                             <label class="col-form-label">Orden Médica</label>
-                            <textarea class="form-control @error('order') is-invalid @enderror" name="order" placeholder="Introduzca la orden médica" rows="4">@if(is_null($report->order) || empty($report->order)){{ old('order') }}@else{{ $report->order }}@endif</textarea>
+                            <textarea class="form-control @error('order') is-invalid @enderror" name="order" placeholder="Introduzca la orden médica" rows="4" id="content-order">@if(is_null($report->order) || empty($report->order)){{ old('order') }}@else{{ $report->order }}@endif</textarea>
                         </div>
 
                         <div class="form-group col-12 d-flex justify-content-between">
@@ -700,7 +700,7 @@
 
                         <div class="form-group col-12">
                             <label class="col-form-label">Receta Médica</label>
-                            <textarea class="form-control @error('recipe') is-invalid @enderror" name="recipe" placeholder="Introduzca la receta médica" rows="6">@if(is_null($report->recipe) || empty($report->recipe)){{ old('recipe') }}@else{{ $report->recipe }}@endif</textarea>
+                            <textarea class="form-control @error('recipe') is-invalid @enderror" name="recipe" placeholder="Introduzca la receta médica" rows="6" id="content-recipe">@if(is_null($report->recipe) || empty($report->recipe)){{ old('recipe') }}@else{{ $report->recipe }}@endif</textarea>
                         </div>
 
                         <div class="form-group d-flex justify-content-end col-12">
@@ -894,6 +894,7 @@
 <script src="{{ asset('/admins/vendor/uploader/jquery.dm-uploader.min.js') }}"></script>
 <script src="{{ asset('/admins/vendor/select2/select2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/admins/vendor/touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+<script src="{{ asset('/admins/vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/jquery.validate.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/additional-methods.js') }}"></script>
 <script src="{{ asset('/admins/vendor/validate/messages_es.js') }}"></script>

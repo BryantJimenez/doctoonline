@@ -85,8 +85,10 @@
 		</div>
 
 		<div class="w-100 mb-3">
-			<p>Ref:</p>
-			<p class="pl-5">{{ $report->recipe }}</p>
+			<p class="mb-1">Ref:</p>
+			<div class="pl-5">
+				{!! $report->recipe !!}
+			</div>
 		</div>
 
 		<div class="w-100">

@@ -859,6 +859,8 @@ class WebController extends Controller
     }
 
     public function storeReportThree(ReportThreeStoreRequest $request, $slug) {
+        ini_set("max_execution_time", 300000);
+
         $report=Report::where('slug', $slug)->firstOrFail();
         $data=array('order' => request('order'), 'phase' => '3');
         $report->fill($data)->save();
@@ -929,6 +931,50 @@ class WebController extends Controller
         }
 
         if ($report) {
+            define('RECIPES_DIR', public_path('/admins/uploads/orders'));
+
+            if (!is_dir(RECIPES_DIR)){
+                mkdir(RECIPES_DIR, 0755, true);
+            }
+
+            try {
+                $pdfPath=RECIPES_DIR.'/ordenmedica.pdf';
+                File::put($pdfPath, PDF::loadView('admin.pdfs.order', compact('report'))->output());
+
+                $count=Pharmacy::count();
+                if ($count>1) {
+                    $to=[];
+                    $num=0;
+                    $emails=Pharmacy::all();
+                    foreach ($emails as $email) {
+                        $to[$num]=$email->email;
+                        $num++;
+                    }
+                } elseif ($count==1) {
+                    $emails=Pharmacy::first();
+                    $to=$emails->email;
+                }
+
+                if ($count>0) {
+                    Mail::send('admin.emails.order', ['name' => $report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname], function($msj) use ($pdfPath, $to, $report) {
+                        $msj->subject('Orden Médica del Paciente: '.$report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname);
+                        $msj->from('no-reply@doctoonline.cl', 'Doctoonline');
+                        $msj->to($to);
+                        $msj->attach($pdfPath);
+                    });
+                }
+                
+                Mail::send('admin.emails.order', ['name' => $report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname], function($msj) use ($pdfPath, $report) {
+                    $msj->subject('Orden Médica del Paciente: '.$report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname);
+                    $msj->from('no-reply@doctoonline.cl', 'Doctoonline');
+                    $msj->to($report->patient->people->email);
+                    $msj->attach($pdfPath);
+                });
+
+            } catch (Exception $e) {
+                return redirect()->back()->with(['alert' => 'lobibox','type' => 'error', 'title' => 'Envio fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            }
+
             return redirect()->route('reports.create', ['slug' => $report->patient->people->slug, 'report' => $slug])->with(['alert' => 'lobibox', 'type' => 'success', 'title' => 'Registro exitoso', 'msg' => 'El informe ha sido registrado exitosamente.']);
         } else {
             return redirect()->back()->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Registro fallido', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.'])->withInputs();
@@ -936,7 +982,6 @@ class WebController extends Controller
     }
 
     public function storeReportFour(ReportFourStoreRequest $request, $slug) {
-        $normalTimeLimit=ini_get("max_execution_time");
         ini_set("max_execution_time", 300000);
 
         $report=Report::where('slug', $slug)->firstOrFail();
@@ -976,7 +1021,13 @@ class WebController extends Controller
                         $msj->attach($pdfPath);
                     });
                 }
-                ini_set("max_execution_time", $normalTimeLimit);
+
+                Mail::send('admin.emails.recipe', ['name' => $report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname], function($msj) use ($pdfPath, $report) {
+                    $msj->subject('Receta Médica de Paciente: '.$report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname);
+                    $msj->from('no-reply@doctoonline.cl', 'Doctoonline');
+                    $msj->to($report->patient->people->email);
+                    $msj->attach($pdfPath);
+                });
 
             } catch (Exception $e) {
                 return redirect()->back()->with(['alert' => 'lobibox','type' => 'error', 'title' => 'Envio fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
@@ -993,7 +1044,7 @@ class WebController extends Controller
         $data=array('phase' => '5');
         $report->fill($data)->save();
 
-        if (!is_null($report->exams) && $request->has('files')) {
+        if (!is_null($report->exams)) {
             $num=0;
             foreach ($report->exams as $exam) {
                 $exa=ExamReport::where('id', $exam->id)->firstOrFail();
@@ -1132,6 +1183,8 @@ class WebController extends Controller
     }
 
     public function updateReportThree(ReportThreeStoreRequest $request, $slug) {
+        ini_set("max_execution_time", 300000);
+        
         $report=Report::where('slug', $slug)->firstOrFail();
         $data=array('order' => request('order'));
         $report->fill($data)->save();
@@ -1202,6 +1255,50 @@ class WebController extends Controller
         }
 
         if ($report) {
+            define('RECIPES_DIR', public_path('/admins/uploads/orders'));
+
+            if (!is_dir(RECIPES_DIR)){
+                mkdir(RECIPES_DIR, 0755, true);
+            }
+
+            try {
+                $pdfPath=RECIPES_DIR.'/ordenmedica.pdf';
+                File::put($pdfPath, PDF::loadView('admin.pdfs.order', compact('report'))->output());
+
+                $count=Pharmacy::count();
+                if ($count>1) {
+                    $to=[];
+                    $num=0;
+                    $emails=Pharmacy::all();
+                    foreach ($emails as $email) {
+                        $to[$num]=$email->email;
+                        $num++;
+                    }
+                } elseif ($count==1) {
+                    $emails=Pharmacy::first();
+                    $to=$emails->email;
+                }
+
+                if ($count>0) {
+                    Mail::send('admin.emails.order', ['name' => $report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname], function($msj) use ($pdfPath, $to, $report) {
+                        $msj->subject('Orden Médica del Paciente: '.$report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname);
+                        $msj->from('no-reply@doctoonline.cl', 'Doctoonline');
+                        $msj->to($to);
+                        $msj->attach($pdfPath);
+                    });
+                }
+                
+                Mail::send('admin.emails.order', ['name' => $report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname], function($msj) use ($pdfPath, $report) {
+                    $msj->subject('Orden Médica del Paciente: '.$report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname);
+                    $msj->from('no-reply@doctoonline.cl', 'Doctoonline');
+                    $msj->to($report->patient->people->email);
+                    $msj->attach($pdfPath);
+                });
+
+            } catch (Exception $e) {
+                return redirect()->back()->with(['alert' => 'lobibox','type' => 'error', 'title' => 'Envio fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
+            }
+
             return redirect()->back()->with(['alert' => 'lobibox', 'type' => 'success', 'title' => 'Edición exitosa', 'msg' => 'El informe ha sido editado exitosamente.']);
         } else {
             return redirect()->back()->with(['alert' => 'lobibox', 'type' => 'error', 'title' => 'Edición fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);
@@ -1209,7 +1306,6 @@ class WebController extends Controller
     }
 
     public function updateReportFour(ReportFourStoreRequest $request, $slug) {
-        $normalTimeLimit=ini_get("max_execution_time");
         ini_set("max_execution_time", 300000);
 
         $report=Report::where('slug', $slug)->firstOrFail();
@@ -1249,7 +1345,13 @@ class WebController extends Controller
                         $msj->attach($pdfPath);
                     });
                 }
-                ini_set("max_execution_time", $normalTimeLimit);
+                
+                Mail::send('admin.emails.recipe', ['name' => $report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname], function($msj) use ($pdfPath, $report) {
+                    $msj->subject('Receta Médica de Paciente: '.$report->patient->people->name." ".$report->patient->people->first_lastname." ".$report->patient->people->second_lastname);
+                    $msj->from('no-reply@doctoonline.cl', 'Doctoonline');
+                    $msj->to($report->patient->people->email);
+                    $msj->attach($pdfPath);
+                });
 
             } catch (Exception $e) {
                 return redirect()->back()->with(['alert' => 'lobibox','type' => 'error', 'title' => 'Envio fallida', 'msg' => 'Ha ocurrido un error durante el proceso, intentelo nuevamente.']);

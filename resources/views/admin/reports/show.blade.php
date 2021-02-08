@@ -362,7 +362,7 @@
 							</li>
 
 							<li class="contacts-block__item">
-								<span class="h6 text-black"><b>Orden Médica:</b> @if(!empty($report->order) && !is_null($report->order)){{ $report->order }}@else{{ "No Ingresada" }}@endif</span>
+								<span class="h6 text-black"><b>Orden Médica:</b> @if(!empty($report->order) && !is_null($report->order)){!! $report->order !!}@else{{ "No Ingresada" }}@endif</span>
 							</li>
 
 							@if(!is_null($report->exams) && count($report->exams)>0)
@@ -403,7 +403,7 @@
 							</li>
 							
 							<li class="contacts-block__item">
-								<span class="h6 text-black"><b>Receta Médica:</b> @if(!empty($report->recipe) && !is_null($report->recipe)){{ $report->recipe }}@else{{ "No Ingresada" }}@endif</span>
+								<span class="h6 text-black"><b>Receta Médica:</b> @if(!empty($report->recipe) && !is_null($report->recipe)){!! $report->recipe !!}@else{{ "No Ingresada" }}@endif</span>
 							</li>
 							@endif
 

@@ -44,6 +44,9 @@
                                     @if(!is_null($report->recipe) && !empty($report->recipe))
                                     <a href="{{ route('reports.pdf.recipe', ['slug' => $report->slug]) }}" class="btn btn-sm btn-primary rounded" target="_blank"><i class="fa fa-file-pdf"></i></a>
                                     @endif
+                                    @if(!is_null($report->order) && !empty($report->order))
+                                    <a href="{{ route('reports.pdf.order', ['slug' => $report->slug]) }}" class="btn btn-sm btn-primary rounded" target="_blank"><i class="fa fa-file"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

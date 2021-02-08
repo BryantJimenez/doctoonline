@@ -202,7 +202,7 @@
 
                     @if($report->weight>0 && $report->height>0)
                     <div class="col-lg-3 col-md-3 col-sm-6 col-12 my-2">
-                        <p class="h6 text-black mb-0"><b>IMC:</b> {{ number_format($report->weight/$report->height*$report->height, 2, ".", ",")." Kg/M2" }}</p>
+                        <p class="h6 text-black mb-0"><b>IMC:</b> @if($report->height>0){{ number_format($report->weight/$report->height*$report->height, 2, ".", ",")." Kg/M2" }}@else{{ "La altura no puede ser 0." }}@endif</p>
                     </div>
                     @endif
 
@@ -281,7 +281,8 @@
 
                     @if(!empty($report->order) && !is_null($report->order))
                     <div class="col-12 my-2">
-                        <p class="h6 text-black mb-0"><b>Orden Médica:</b> @if(!empty($report->order) && !is_null($report->order)){{ $report->order }}@else{{ "No Ingresada" }}@endif</p>
+                        <p class="h6 text-black mb-0"><b>Orden Médica:</b> @if(empty($report->order) && is_null($report->order)){{ "No Ingresada" }}@endif</p>
+                        @if(!empty($report->order) && !is_null($report->order)){!! $report->order !!}@endif
                     </div>
 
                     @if(!is_null($report->exams) && count($report->exams)>0)
@@ -317,7 +318,8 @@
 
                     @if(!empty($report->recipe) && !is_null($report->recipe))
                     <div class="col-12 my-2">
-                        <p class="h6 text-black mb-0"><b>Receta Médica:</b> @if(!empty($report->recipe) && !is_null($report->recipe)){{ $report->recipe }}@else{{ "No Ingresada" }}@endif</p>
+                        <p class="h6 text-black mb-0"><b>Receta Médica:</b> @if(empty($report->recipe) && is_null($report->recipe)){{ "No Ingresada" }}@endif</p>
+                        @if(!empty($report->recipe) && !is_null($report->recipe)){!! $report->recipe !!}@endif
                     </div>
                     @endif
 

@@ -86,7 +86,8 @@
 
 		<div class="w-100 mb-3">
 			<p class="h4 text-center text-uppercase font-weight-bold">Orden de Examen</p>
-			<p class="mb-2">Ref: {{ $report->order }}</p>
+			<p class="mb-2">Ref: </p>
+			{!! $report->order !!}
 		</div>
 
 		@foreach($report->exams as $exam)

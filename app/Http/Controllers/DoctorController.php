@@ -264,7 +264,7 @@ class DoctorController extends Controller
         $specialty=Specialty::where('slug', request('slug'))->firstOrFail();
         $service=Service::where('slug', request('service'))->firstOrFail();
         foreach ($specialty->doctors as $doctor) {
-            if (!is_null($doctor->diary_doctor)) {
+            if (!is_null($doctor->diary_doctor) && $doctor->state=='1' && $doctor->diary_doctor->state=='1') {
                 foreach ($doctor->diary_doctor->schedules as $schedule) {
                     if ($schedule->service_id==$service->id) {
                         $doctorsSelect[$num]=['slug' => $doctor->people->slug, 'name' => $doctor->people->name." ".$doctor->people->first_lastname." ".$doctor->people->second_lastname];
